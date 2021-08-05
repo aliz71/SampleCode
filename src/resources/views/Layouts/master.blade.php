@@ -6,6 +6,7 @@
     <title>Ali Zahedi Test</title>
     <meta content="This is a test for Yaraku company and is developed by Ali Zahedi." name="description">
     <meta content="Test, assessment, Ali Zahedi, Yaraku" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Favicons -->
     <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -35,6 +36,7 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
@@ -43,6 +45,8 @@
 
 <!-- Template Main JS File -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
+
+@yield('scripts')
 
 </body>
 </html>

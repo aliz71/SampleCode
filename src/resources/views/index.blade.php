@@ -12,21 +12,18 @@
     </section><!-- End Hero -->
 
     <main id="main">
-        <!-- ======= Contact Section ======= -->
+        <!-- ======= Test Section ======= -->
         <section id="test" class="contact">
             <div class="container">
-
                 <div class="section-title">
                     <h2>Test</h2>
                     <p>You can control books from here</p>
                 </div>
-
                 <div class="row mt-5">
                     <div class="col-lg-2">
                     </div>
-
                     <div class="col-lg-8 mt-5 mt-lg-0">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="text" name="title" class="form-control" id="title"
@@ -39,7 +36,6 @@
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
@@ -47,13 +43,32 @@
                                 <div class="sent-message">Your message has been sent. Thank you!</div>
                             </div>
                             <div class="text-center">
-                                <button type="submit">Send</button>
+                                <button type="submit" onclick="createBook()">Send</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </section><!-- End Contact Section -->
+        </section><!-- End Test Section -->
     </main><!-- End #main -->
 
+@endsection
+
+@section('scripts')
+    <script>
+        $.ajaxSetup({
+            headers:
+                {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
+
+        function createBook() {
+            let title = $('#title').val();
+            let author = $('#author').val();
+            $.post('{{ route('books.store') }}', {title: title, author: author}, function (data) {
+                console.log(data);
+            }).fail(function (e) {
+                console.log(e.responseJSON);
+            });
+        }
+    </script>
 @endsection
