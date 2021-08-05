@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Repositories\Interfaces\RepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Repository implements RepositoryInterface
@@ -18,32 +17,32 @@ class Repository implements RepositoryInterface
     }
 
     // Get all instances of model
-    public function all(): Collection
+    public function all()
     {
         return $this->model->all();
     }
 
     // create a new record in the database
-    public function create(array $data): Collection
+    public function create(array $data)
     {
         return $this->model->create($data);
     }
 
     // update record in the database
-    public function update(array $data, int $id): Collection
+    public function update(array $data, int $id)
     {
         $record = $this->model->find($id);
         return $record->update($data);
     }
 
     // remove record from the database
-    public function delete(int $id): Collection
+    public function delete(int $id)
     {
         return $this->model->destroy($id);
     }
 
     // show the record with the given id
-    public function show(int $id): Collection
+    public function show(int $id)
     {
         return $this->model->findOrFail($id);
     }
