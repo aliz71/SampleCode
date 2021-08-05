@@ -12,4 +12,6 @@
 */
 
 Route::get('/', 'IndexController@index');
-Route::resource('books', 'BookController');
+Route::resource('books', 'BookController')->only([
+    'store', 'destroy', 'update'
+]);
