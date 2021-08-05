@@ -2,11 +2,26 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use App\Services\ResponseService;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Exception;
 
 class Handler extends ExceptionHandler
 {
+    private $responseService;
+
+    public function __construct(Container $container, ResponseService $responseService)
+    {
+        parent::__construct($container);
+        $this->responseService = $responseService;
+    }
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -29,7 +44,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -40,12 +55,20 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param \Exception $exception
+     * @return Response|JsonResponse
+     * @throws Exception
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ValidationException && ($request->is('api/*') || $request->ajax())) {
+            return $this->responseService->respond($exception->errors(), 422);
+        } elseif ($exception instanceof MethodNotAllowedHttpException && ($request->is('api/*') || $request->ajax())) {
+            return $this->responseService->respond(["message" => "Your request is invalid."], 405);
+        } elseif ($exception instanceof \Exception && ($request->is('api/*') || $request->ajax())) {
+            return $this->responseService->respond(["message" => $exception->getMessage()], 422);
+        }
         return parent::render($request, $exception);
     }
 }
