@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5, h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
   padding: 0;
@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #fff;
@@ -1201,6 +1201,16 @@ section {
   margin-top: 25px;
 }
 
+.edit-error-message, .delete-error-message{
+    display: none;
+    color: #fff;
+    background: #ed3c0d;
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+    margin-top: 25px;
+}
+
 .contact .php-email-form .sent-message {
   display: none;
   color: #fff;
@@ -1248,7 +1258,7 @@ section {
   padding: 10px 12px;
 }
 
-.contact .php-email-form button[type="submit"] {
+.contact .php-email-form button[type="button"] {
   background: #e43c5c;
   border: 0;
   padding: 10px 28px;
@@ -1257,7 +1267,7 @@ section {
   border-radius: 50px;
 }
 
-.contact .php-email-form button[type="submit"]:hover {
+.contact .php-email-form button[type="button"]:hover {
   background: #d01d3f;
 }
 
