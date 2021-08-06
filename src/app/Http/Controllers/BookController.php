@@ -25,13 +25,15 @@ class BookController extends Controller
         return $this->responseService->respond($book->toArray());
     }
 
-    public function update(Request $request, $id): JsonResponse
+    public function update(Request $request, int $id): JsonResponse
     {
+        $this->bookRepository->update($request->all(), $id);
         return $this->responseService->respond();
     }
 
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
+        $this->bookRepository->delete($id);
         return $this->responseService->respond();
     }
 }
