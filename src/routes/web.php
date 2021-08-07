@@ -15,3 +15,5 @@ Route::get('/', 'IndexController@index');
 Route::resource('books', 'BookController')->only([
     'store', 'destroy', 'update', 'index'
 ]);
+Route::get('books/csv-export', 'BookController@cvsExport');
+Route::get('books/xml-export', 'BookController@xmlExport');
