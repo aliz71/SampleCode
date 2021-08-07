@@ -87,6 +87,45 @@
                 "url": '{{ route('books.index') }}',
                 "type": "GET"
             },
+            dom: 'frtipB',
+            buttons: [
+                {
+                    text: 'Title and Author CSV',
+                    action: function (e, dt, node, config) {
+                        location.href = '{{ url('books/csv-export') }}?columns=title,author';
+                    }
+                },
+                {
+                    text: 'Title CSV',
+                    action: function (e, dt, node, config) {
+                        location.href = '{{ url('books/csv-export') }}?columns=title';
+                    }
+                },
+                {
+                    text: 'Author CSV',
+                    action: function (e, dt, node, config) {
+                        location.href = '{{ url('books/csv-export') }}?columns=author';
+                    }
+                },
+                {
+                    text: 'Title and Author XML',
+                    action: function (e, dt, node, config) {
+                        location.href = '{{ url('books/xml-export') }}?columns=title,author';
+                    }
+                },
+                {
+                    text: 'Title XML',
+                    action: function (e, dt, node, config) {
+                        location.href = '{{ url('books/xml-export') }}?columns=title';
+                    }
+                },
+                {
+                    text: 'Author XML',
+                    action: function (e, dt, node, config) {
+                        location.href = '{{ url('books/xml-export') }}?columns=author';
+                    }
+                }
+            ],
             columns: [
                 {data: 'id'},
                 {data: 'title'},
@@ -95,8 +134,8 @@
             ],
             columnDefs: [{
                 targets: [-1], render: function (data, type, row) {
-                    return '<button type="button" class="btn btn-primary btn-xs" onclick="editModal(\'' + row.title + '\', \'' + row.author + '\', ' + row.id + ')">Edit</button> '
-                        + '<button type="button" class="btn btn-danger btn-xs" onclick="deleteModal(' + row.id + ')">Delete</button>';
+                    return '<button type="button" class="btn btn-primary btn-xs" onclick="editModal(\'' + row.title + '\', \'' + row.author + '\', ' + row.id + ')"><i class="bi bi-pencil-square"></i></button> '
+                        + '<button type="button" class="btn btn-danger btn-xs" onclick="deleteModal(' + row.id + ')"><i class="bi bi-x-square"></i></button>';
                 }
             }],
         });
