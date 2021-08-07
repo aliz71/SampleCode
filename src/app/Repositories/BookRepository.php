@@ -14,4 +14,9 @@ class BookRepository extends Repository implements BookRepositoryInterface
         parent::__construct($model);
         $this->model = $model;
     }
+
+    public function getSelectedColumns(array $columns = ['*'])
+    {
+        return $this->model->select($columns)->get();
+    }
 }
