@@ -33,8 +33,8 @@ class BookController extends Controller
 
     public function store(StoreRequest $request): JsonResponse
     {
-        $book = $this->bookRepository->create($request->all());
-        return $this->responseService->respond($book->toArray());
+        $this->bookRepository->create($request->all());
+        return $this->responseService->respond();
     }
 
     public function update(UpdateRequest $request, int $id): JsonResponse
