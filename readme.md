@@ -1,31 +1,19 @@
 ## Requirements
-- [Docker](https://docs.docker.com/install)
-- [Docker Compose](https://docs.docker.com/compose/install)
+- PHP >= 7.2.5
+- MySQL
 
 ## Setup
 1. Clone the repository.
-1. Start the containers by running `docker-compose up -d` in the project root.
-1. Install the composer packages by running `docker-compose exec laravel composer install`.
-1. Access the Laravel instance on `http://localhost` (If there is a "Permission denied" error, run `docker-compose exec laravel chown -R www-data storage`).
+1. Go to the main path `cd src`.
+1. Install project dependencies (make sure you have installed composer on your machine) `composer install`.
+1. Create .env file from .env.example and set database configuration in your .env file.
+1. Run this command for creating tables and insert default data in tables `php artisan migrate:fresh --seed`.
+1. Run the server by this command (make sure your 8000 port is free in your machine) `php artisan serve`.
+1. Go to this path on your browser `http://127.0.0.1:8000`.
 
-Note that the changes you make to local files will be automatically reflected in the container. 
+## How to run tests
+1. Go to the main path `cd src`.
+1. Run this command for running tests `php artisan dusk`.
 
-## Persistent database
-If you want to make sure that the data in the database persists even if the database container is deleted, add a file named `docker-compose.override.yml` in the project root with the following contents.
-```
-version: "3.7"
-
-services:
-  mysql:
-    volumes:
-    - mysql:/var/lib/mysql
-
-volumes:
-  mysql:
-```
-Then run the following.
-```
-docker-compose stop \
-  && docker-compose rm -f mysql \
-  && docker-compose up -d
-``` 
+## How to use the project
+After the project is installed successfully on your machine on the main route you can find the related form and table of books and work with the project.
